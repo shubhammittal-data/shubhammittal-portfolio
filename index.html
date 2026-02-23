@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shubham Mittal</title>
+    <meta name="description" content="Shubham Mittal — Business Analyst, Product Manager, Operations Analyst">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root{--bg:#1a1a2e;--bg-light:#16213e;--bg-card:#1e2746;--bg-card-alt:#222b45;--accent:#e2b04a;--accent-light:#f0d078;--accent-dim:rgba(226,176,74,.12);--text:#f0ece2;--text-secondary:#a8a4b8;--text-muted:#6e6a80;--border:rgba(240,236,226,.06);--border-hover:rgba(226,176,74,.25);--radius:18px;--radius-sm:12px;--font-display:'Playfair Display',serif;--font-body:'DM Sans',sans-serif;--font-mono:'JetBrains Mono',monospace}
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;font-size:1.05rem}
+        ::selection{background:var(--accent);color:var(--bg)}
+        a{color:inherit;text-decoration:none}
+
+        .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;position:relative;overflow:hidden}
+        .hero-bg-gradient{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(226,176,74,.06) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(30,39,70,.8) 0%,transparent 50%);pointer-events:none}
+        .hero-bento{display:grid;grid-template-columns:1fr 1.4fr 1fr;grid-template-rows:1fr 1fr;gap:1rem;max-width:1100px;width:100%;position:relative;z-index:1}
+        .bento-cell{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .35s ease}
+        .bento-cell:hover{border-color:var(--border-hover)}
+        .bento-photo{aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:var(--bg-card);color:var(--text-muted);font-size:.8rem;text-align:center;padding:1rem;position:relative}
+        .bento-photo .photo-placeholder{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+        .bento-photo .photo-placeholder i{font-size:2rem;opacity:.4}
+        .bento-photo .photo-placeholder span{font-size:.72rem;color:var(--text-muted);opacity:.6}
+        .bento-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+        .bento-name{grid-column:2;grid-row:1/3;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:3rem 2rem;background:var(--bg-light);position:relative}
+        .bento-name h1{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);font-weight:600;line-height:1.1;margin-bottom:.2rem}
+        .bento-name h1:last-of-type{margin-bottom:.8rem}
+        .bento-name .subtitle{font-size:.95rem;color:var(--accent);font-weight:500;margin-bottom:2rem;letter-spacing:.02em}
+
+        .tools-marquee{display:flex;gap:1.5rem;overflow:hidden;width:100%;mask-image:linear-gradient(90deg,transparent,black 15%,black 85%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,black 15%,black 85%,transparent)}
+        .tools-track{display:flex;gap:1.2rem;animation:marqueeScroll 22s linear infinite}
+        .tool-icon{width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.15rem;transition:all .3s}
+        .tool-icon:hover{border-color:var(--border-hover);transform:scale(1.1)}
+        .tool-python{color:#3776AB}.tool-sql{color:#F29111}.tool-tableau{color:#E97627}.tool-powerbi{color:#F2C811}.tool-aws{color:#FF9900}.tool-jira{color:#0052CC}.tool-excel{color:#217346}.tool-snowflake{color:#29B5E8}.tool-git{color:#F05032}.tool-confluence{color:#2684FF}
+        @keyframes marqueeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        .bento-name .scroll-hint{margin-top:2.5rem;font-size:.75rem;color:var(--text-muted);letter-spacing:.1em;animation:bounceDown 2s ease-in-out infinite}
+        @keyframes bounceDown{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+        /* Quote & Stats Cards */
+        .bento-quote{aspect-ratio:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:1.5rem;background:var(--bg-card);border:1px solid var(--border) !important}
+        .bento-quote:hover{border-color:var(--border-hover) !important}
+        .bento-quote .quote-text{font-family:var(--font-display);font-style:italic;font-size:1rem;color:var(--accent);line-height:1.6}
+        .bento-quote .quote-text span{color:var(--accent);font-style:normal}
+        .bento-stats{aspect-ratio:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border) !important;overflow:hidden}
+        .bento-stats:hover{border-color:var(--border-hover) !important}
+        .stat-cell{background:var(--bg-card);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:.6rem}
+        .stat-cell .stat-num{font-family:var(--font-display);font-size:1.5rem;color:var(--accent);font-weight:600;line-height:1.2}
+        .stat-cell .stat-label{font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-top:.2rem;font-weight:500}
+
+        /* Hero-to-content scroll transition */
+        .hero{position:relative;z-index:2}
+        .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(transparent,var(--bg));pointer-events:none;z-index:3}
+        .hero .hero-bento{transition:transform .4s ease,opacity .4s ease}
+        .hero.scrolled-away .hero-bento{transform:scale(.96) translateY(-20px);opacity:.3}
+
+        .section{max-width:1100px;margin:0 auto;padding:5rem 2rem}
+        .section-header{margin-bottom:3rem}
+        .section-header h2{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,2.8rem);font-weight:600;margin-bottom:.5rem}
+        .section-divider{width:100%;height:1px;background:var(--border);margin:0 auto}
+        .about-content{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+        .about-story{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:2.2rem;transition:all .3s}
+        .about-story:hover{border-color:var(--border-hover)}
+        .about-story h3{font-family:var(--font-display);font-size:1.45rem;margin-bottom:.3rem}
+        .about-story h4{font-size:.85rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:600;margin-bottom:.8rem}
+        .about-story p{color:var(--text-secondary);font-size:1.02rem;line-height:1.8}
+        .about-story p a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+        .about-full{grid-column:1/-1}
+        .sidebar-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.5rem;transition:all .3s}
+        .sidebar-card:hover{border-color:var(--border-hover)}
+        .sidebar-card h4{font-size:1.05rem;font-weight:600;margin-bottom:.8rem}
+        .sidebar-card ul{list-style:none}
+        .sidebar-card ul li{position:relative;padding-left:1.2rem;margin-bottom:.5rem;font-size:1rem;color:var(--text-secondary)}
+        .sidebar-card ul li::before{content:'•';position:absolute;left:0;color:var(--accent);font-weight:bold}
+        .about-gallery{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+        .gallery-item{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;aspect-ratio:1;position:relative;display:flex;align-items:center;justify-content:center;transition:all .3s}
+        .gallery-item:hover{border-color:var(--border-hover);transform:translateY(-3px)}
+        .gallery-item .gallery-label{font-size:.9rem;color:var(--text-muted);text-align:center;padding:.5rem}
+        .gallery-item img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+        .gallery-item .gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:.8rem;background:linear-gradient(transparent,rgba(26,26,46,.9));font-size:.88rem;font-weight:500}
+
+        .exp-tabs{display:flex;gap:.5rem;margin-bottom:2.5rem;flex-wrap:wrap}
+        .exp-tab{padding:.6rem 1.5rem;border-radius:30px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font-family:var(--font-body);font-size:.95rem;font-weight:500;cursor:pointer;transition:all .3s}
+        .exp-tab.active,.exp-tab:hover{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+        .exp-panel{display:none}.exp-panel.active{display:block}
+        .skills-grid{display:flex;flex-direction:column;gap:1.5rem}
+        .skill-row h4{font-size:.95rem;font-weight:600;color:var(--accent);margin-bottom:.6rem}
+        .skill-row p{color:var(--text-secondary);font-size:1rem;line-height:1.8}
+        .leadership-list{list-style:none}
+        .leadership-list li{position:relative;padding-left:1.5rem;margin-bottom:1rem;color:var(--text-secondary);font-size:1.02rem}
+        .leadership-list li::before{content:'▸';position:absolute;left:0;color:var(--accent);font-weight:bold}
+        .leadership-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.8rem;margin-top:2rem}
+        .leadership-gallery-item{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:.72rem;overflow:hidden;position:relative}
+        .leadership-gallery-item img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+        .work-list{display:flex;flex-direction:column;gap:2.5rem}
+        .work-item{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:all .3s}
+        .work-item:hover{border-color:var(--border-hover)}
+        .work-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+        .work-header h4{font-family:var(--font-display);font-size:1.3rem;font-weight:600}
+        .work-company{color:var(--accent);font-weight:500;font-size:1rem}
+        .work-meta{font-size:.9rem;color:var(--text-muted)}
+        .work-meta span{margin-right:1.2rem}
+        .work-bullets{list-style:none;margin-top:.8rem}
+        .work-bullets li{position:relative;padding-left:1.2rem;margin-bottom:.6rem;font-size:1rem;color:var(--text-secondary);line-height:1.7}
+        .work-bullets li::before{content:'•';position:absolute;left:0;color:var(--accent)}
+
+        .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+        .project-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .4s ease;display:flex;flex-direction:column}
+        .project-card:hover{border-color:var(--border-hover);transform:translateY(-5px);box-shadow:0 20px 60px rgba(0,0,0,.2)}
+        .project-thumb{height:180px;background:var(--bg-card-alt);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+        .project-thumb .project-thumb-icon{font-size:3rem;color:var(--accent);opacity:.3}
+        .project-thumb img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+        .project-body{padding:1.8rem;flex:1;display:flex;flex-direction:column}
+        .project-body h3{font-family:var(--font-display);font-size:1.25rem;margin-bottom:.8rem}
+        .project-body p{font-size:1rem;color:var(--text-secondary);line-height:1.7;flex:1}
+        .project-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.2rem}
+        .project-tag{padding:.25rem .65rem;background:var(--accent-dim);border:1px solid rgba(226,176,74,.15);border-radius:20px;font-size:.8rem;color:var(--accent-light);font-weight:500}
+        .project-metric{display:inline-block;margin-top:.8rem;padding:.35rem .8rem;background:rgba(226,176,74,.08);border:1px solid rgba(226,176,74,.15);border-radius:8px;font-size:.9rem;color:var(--accent);font-weight:600}
+        .project-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:.8rem;font-size:.92rem;color:var(--accent);font-weight:500;transition:gap .3s}
+        .project-link:hover{gap:.7rem}
+
+        .connect-section{text-align:center;padding:5rem 2rem;max-width:700px;margin:0 auto}
+        .connect-section h2{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.5rem);margin-bottom:1rem}
+        .connect-section p{color:var(--text-secondary);font-size:1.08rem;margin-bottom:2.5rem;line-height:1.8}
+        .connect-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+        .connect-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.8rem;border-radius:30px;font-family:var(--font-body);font-size:.95rem;font-weight:600;transition:all .3s;border:1px solid var(--border);color:var(--text)}
+        .connect-btn.primary{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+        .connect-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(226,176,74,.2)}
+        .connect-btn.primary:hover{background:var(--accent-light)}
+        footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--text-muted)}
+
+        /* Sophisticated scroll reveal animations */
+        .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+        .reveal-left{opacity:0;transform:translateX(-50px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
+        .reveal-left.visible{opacity:1;transform:translateX(0)}
+        .reveal-right{opacity:0;transform:translateX(50px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
+        .reveal-right.visible{opacity:1;transform:translateX(0)}
+        .reveal-scale{opacity:0;transform:scale(.9);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
+        .reveal-scale.visible{opacity:1;transform:scale(1)}
+        /* Stagger children */
+        .stagger-children>*{opacity:0;transform:translateY(30px);transition:opacity .6s cubic-bezier(.23,1,.32,1),transform .6s cubic-bezier(.23,1,.32,1)}
+        .stagger-children.visible>*:nth-child(1){opacity:1;transform:translateY(0);transition-delay:.05s}
+        .stagger-children.visible>*:nth-child(2){opacity:1;transform:translateY(0);transition-delay:.12s}
+        .stagger-children.visible>*:nth-child(3){opacity:1;transform:translateY(0);transition-delay:.19s}
+        .stagger-children.visible>*:nth-child(4){opacity:1;transform:translateY(0);transition-delay:.26s}
+        .stagger-children.visible>*:nth-child(5){opacity:1;transform:translateY(0);transition-delay:.33s}
+        .stagger-children.visible>*:nth-child(6){opacity:1;transform:translateY(0);transition-delay:.40s}
+        /* Section divider animation */
+        .section-divider{transform:scaleX(0);transition:transform 1s cubic-bezier(.23,1,.32,1);transform-origin:left}
+        .section-divider.visible{transform:scaleX(1)}
+
+        @media(max-width:900px){.hero-bento{grid-template-columns:1fr 1fr}.bento-name{grid-column:1/-1;grid-row:auto;padding:2.5rem 1.5rem}.bento-quote{aspect-ratio:auto}.bento-stats{aspect-ratio:auto}.about-content{grid-template-columns:1fr}.about-gallery{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:600px){.hero-bento{grid-template-columns:1fr;gap:.8rem}.bento-quote{aspect-ratio:auto}.bento-stats{aspect-ratio:auto}.section{padding:3rem 1.2rem}.projects-grid{grid-template-columns:1fr}.about-gallery{grid-template-columns:1fr 1fr}.leadership-gallery{grid-template-columns:repeat(2,1fr)}}
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-bento">
+        <div class="bento-cell bento-photo">
+            <img src="images/At work.jpeg" alt="At Work">
+        </div>
+
+        <div class="bento-cell bento-name">
+            <h1>Shubham</h1>
+            <h1>Mittal</h1>
+            <div class="subtitle">Business Analyst · Product Manager · Operations Strategist</div>
+            <div class="tools-marquee">
+                <div class="tools-track">
+                    <div class="tool-icon tool-python" title="Python"><i class="fab fa-python"></i></div>
+                    <div class="tool-icon tool-sql" title="SQL"><i class="fas fa-database"></i></div>
+                    <div class="tool-icon tool-tableau" title="Tableau"><i class="fas fa-chart-bar"></i></div>
+                    <div class="tool-icon tool-powerbi" title="Power BI"><i class="fas fa-chart-pie"></i></div>
+                    <div class="tool-icon tool-aws" title="AWS"><i class="fab fa-aws"></i></div>
+                    <div class="tool-icon tool-jira" title="JIRA"><i class="fab fa-jira"></i></div>
+                    <div class="tool-icon tool-excel" title="Excel"><i class="fas fa-file-excel"></i></div>
+                    <div class="tool-icon tool-snowflake" title="Snowflake"><i class="fas fa-snowflake"></i></div>
+                    <div class="tool-icon tool-git" title="Git"><i class="fab fa-git-alt"></i></div>
+                    <div class="tool-icon tool-confluence" title="Confluence"><i class="fab fa-confluence"></i></div>
+                    <div class="tool-icon tool-python" title="Python"><i class="fab fa-python"></i></div>
+                    <div class="tool-icon tool-sql" title="SQL"><i class="fas fa-database"></i></div>
+                    <div class="tool-icon tool-tableau" title="Tableau"><i class="fas fa-chart-bar"></i></div>
+                    <div class="tool-icon tool-powerbi" title="Power BI"><i class="fas fa-chart-pie"></i></div>
+                    <div class="tool-icon tool-aws" title="AWS"><i class="fab fa-aws"></i></div>
+                    <div class="tool-icon tool-jira" title="JIRA"><i class="fab fa-jira"></i></div>
+                    <div class="tool-icon tool-excel" title="Excel"><i class="fas fa-file-excel"></i></div>
+                    <div class="tool-icon tool-snowflake" title="Snowflake"><i class="fas fa-snowflake"></i></div>
+                    <div class="tool-icon tool-git" title="Git"><i class="fab fa-git-alt"></i></div>
+                    <div class="tool-icon tool-confluence" title="Confluence"><i class="fab fa-confluence"></i></div>
+                </div>
+            </div>
+            <div class="scroll-hint">scroll ↓</div>
+        </div>
+
+        <div class="bento-cell bento-photo">
+            <img src="images/headshot2.jpg" alt="Headshot">
+        </div>
+
+        <!-- Quote Card -->
+        <div class="bento-cell bento-quote">
+            <div class="quote-text"><span>"</span>Outcomes over outputs. Understand the problem before picking the tool.<span>"</span></div>
+        </div>
+
+        <!-- Impact Stats Card -->
+        <div class="bento-cell bento-stats">
+            <div class="stat-cell"><div class="stat-num">$300K</div><div class="stat-label">Fraud Recovered</div></div>
+            <div class="stat-cell"><div class="stat-num">$200K+</div><div class="stat-label">Losses Uncovered</div></div>
+            <div class="stat-cell"><div class="stat-num">60%</div><div class="stat-label">Workflow Reduced</div></div>
+            <div class="stat-cell"><div class="stat-num">3+</div><div class="stat-label">Years Impact</div></div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+<section class="section" id="about">
+    <div class="section-header reveal"><h2>About Me</h2></div>
+    <div class="about-content">
+        <div class="about-story about-full reveal">
+            <h3>About Me</h3><br>
+            <h4>Where I'm From</h4>
+            <p>Originally from India, I'm now based in <strong style="color:var(--text)">Atlanta, GA</strong> after completing my <strong style="color:var(--text)">Master's in Technology Management at the University of Illinois Urbana-Champaign (GPA: 3.8/4.0)</strong>. My path from mechanical engineering to business analysis wasn't linear it was driven by a simple realization: the most impactful solutions start with truly understanding the problem, not jumping to the tool.</p><br>
+            <h4>How It Started</h4>
+            <p>At Oxigen Services India, I was thrown into a high-stakes environment 5,000+ kiosks processing $6M in transactions daily. When I helped define requirements for a fraud detection system that <strong style="color:var(--text)">recovered $300K</strong>, I realized I wasn't just running queries, I was shaping how an organization makes decisions. That's when business analysis became more than a job title. It became a craft.</p><br>
+            <h4>What I Do</h4>
+            <p>I partner with stakeholders across Finance, Operations, and Product teams to identify problems, define requirements, and deliver solutions. Whether it's writing user stories, prioritizing backlogs using MoSCoW, building profitability models, or facilitating sprint planning, <strong style="color:var(--text)">I focus on outcomes over outputs</strong>. I believe great products emerge when you understand not just what stakeholders ask for, but the underlying problems they're trying to solve.</p><br>
+            <h4>Domains I've Worked In</h4>
+            <p><strong style="color:var(--accent)">Fintech & Risk</strong> · <strong style="color:var(--accent)">E-Commerce & Supply Chain</strong> · <strong style="color:var(--accent)">Education Policy</strong> · <strong style="color:var(--accent)">HR & Workforce Analytics</strong><br>From validating $6M daily transaction flows to uncovering $200K+ in hidden margin losses, I bring analytical rigor to messy, realworld problems.</p><br>
+            <h4>Beyond Work</h4>
+            <p>When I'm not buried in dashboards or sprint boards, you'll find me playing chess (rated 1800, always looking for a match), diving into conversations about historical events and mythologies, or unwinding on the dance floor. I'm also building <a href="https://instagram.com/talkpalette" target="_blank">Talk Palette</a>, an Instagram page about living an intentional, simplified life. I believe curiosity outside of work makes you sharper inside of it.</p>
+        </div>
+
+        <div class="sidebar-card reveal">
+            <h4>Lately, what have I been doing?</h4>
+            <ul>
+                <li>Building profitability models and demand forecasting systems at Road Ready Wheels</li>
+                <li>Defining product requirements and managing sprints at UIUC's Data Science Research Services</li>
+                <li>Growing <a href="https://instagram.com/talkpalette" target="_blank" style="color:var(--accent)">Talk Palette</a> — my Instagram project on living simply and intentionally</li>
+                <li>Reading <em style="color:var(--text)">The Hard Thing About Hard Things</em> by Ben Horowitz</li>
+                <li>Exploring Atlanta's food scene and settling into a new city</li>
+            </ul>
+        </div>
+
+        <div class="sidebar-card reveal">
+            <h4>Education</h4>
+            <ul>
+                <li><strong style="color:var(--text)">M.S. Technology Management</strong><br>UIUC — 2024–2025 · GPA: 3.8/4.0</li>
+                <li><strong style="color:var(--text)">B.Tech. Mechanical Engineering</strong><br>VIT, India — 2018–2022</li>
+            </ul>
+        </div>
+
+        <div class="about-gallery reveal">
+            <div class="gallery-item"><img src="images/UIUC campus.jpeg" alt="UIUC Campus"><div class="gallery-caption">UIUC Campus</div></div>
+            <div class="gallery-item"><img src="images/at work 2.jpg" alt="At Work"><div class="gallery-caption">At Work</div></div>
+            <div class="gallery-item"><img src="images/chess.jpg" alt="Chess Enthusiast"><div class="gallery-caption">Chess Enthusiast</div></div>
+            <div class="gallery-item"><img src="images/dance.jpeg" alt="Dance & Culture"><div class="gallery-caption">Dance & Culture</div></div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+<section class="section" id="experience">
+    <div class="section-header reveal"><h2>Experience</h2></div>
+    <div class="exp-tabs reveal">
+        <button class="exp-tab active" onclick="switchTab('skills')">Skills</button>
+        <button class="exp-tab" onclick="switchTab('leadership')">Leadership</button>
+        <button class="exp-tab" onclick="switchTab('work')">Work Experience</button>
+    </div>
+
+    <div class="exp-panel active" id="panel-skills">
+        <div class="skills-grid reveal">
+            <div class="skill-row"><h4>Product & Business Analysis</h4><p>Product Design, Backlog Management, Sprint Planning, User Stories, Acceptance Criteria, UAT, Stakeholder Management, Roadmap Planning, Requirements Gathering (BRD/FRD), Gap Analysis, Process Mapping</p></div>
+            <div class="skill-row"><h4>Data & Operations</h4><p>Data Validation, Exception Handling, Quality Control, Data Reconciliation, Root Cause Analysis (5-Why, Fishbone), Lean Six Sigma (DMAIC), KPI Development, Pareto Analysis, Performance Testing</p></div>
+            <div class="skill-row"><h4>Technical Tools</h4><p>Python, SQL (PostgreSQL, SQL Server), Tableau, Power BI (DAX), Excel, Snowflake, NetSuite</p></div>
+            <div class="skill-row"><h4>Cloud & Platforms</h4><p>AWS (Redshift, Aurora, QuickSight, EMR, DynamoDB), Google Cloud Platform</p></div>
+            <div class="skill-row"><h4>Project Management</h4><p>Agile (Scrum), Waterfall, SDLC, JIRA, Confluence, Visio, MoSCoW Prioritization</p></div>
+            <div class="skill-row"><h4>Certifications</h4><p>Six Sigma Green Belt (Ernst & Young) · Google Advanced Data Analytics Professional · AWS Cloud Practitioner</p></div>
+        </div>
+    </div>
+
+    <div class="exp-panel" id="panel-leadership">
+        <div class="reveal">
+            <h4 style="font-family:var(--font-display);font-size:1.1rem;margin-bottom:1rem">Research & Teaching Assistant — Gies College of Business, UIUC</h4>
+            <ul class="leadership-list">
+                <li>Enhanced consumer behavior research through conceptual modeling and advanced visualizations, supporting faculty-led research initiatives</li>
+                <li>Mentored 10 MSBA Business Practicum teams on project execution, strategic framing, and stakeholder communication</li>
+                <li>Refined statistical tables and data visualizations, translating complex academic findings into clear, actionable formats for industry and academic audiences</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="exp-panel" id="panel-work">
+        <div class="work-list reveal">
+            <div class="work-item">
+                <div class="work-header">
+                    <div><h4>Business Analyst</h4><div class="work-company">Road Ready Wheels</div></div>
+                    <div class="work-meta"><span>May 2025 – Present</span><span>Chicago, IL</span></div>
+                </div>
+                <ul class="work-bullets">
+                    <li>Led sprint planning with Finance stakeholders for NetSuite data integration of <strong>10K+ SKUs</strong>, resolving data inconsistencies and establishing a unified analytics foundation</li>
+                    <li>Built 4-quadrant product classification framework categorizing inventory into Winners, Traffic Drivers, Niche, and Underperformers — driving <strong>discontinuation of 200+ unprofitable items</strong></li>
+                    <li>Developed profitability model uncovering <strong>$200K+ in hidden shipping costs</strong>, influencing pricing strategy for 150+ items and eliminating below-cost sales</li>
+                    <li>Created 3-model demand forecasting system for top 50 revenue-generating products achieving <strong>42% prediction accuracy</strong>, supporting inventory planning and reducing stockout risk</li>
+                </ul>
+            </div>
+
+            <div class="work-item">
+                <div class="work-header">
+                    <div><h4>Business Analyst · Product Manager</h4><div class="work-company">Data Science Research Services, UIUC</div></div>
+                    <div class="work-meta"><span>Mar 2025 – Present</span><span>Champaign, IL</span></div>
+                </div>
+                <ul class="work-bullets">
+                    <li>Defined product requirements for end-to-end hiring management platform consolidating review, communications, and pipeline tracking — delivering unified dashboard <strong>reducing workflow time 60%</strong> for 500+ candidates</li>
+                    <li>Refined product backlog using MoSCoW framework; sequenced work to minimize dependencies, <strong>reducing feature cycle time from 4.5 to 2.8 weeks (38% improvement)</strong></li>
+                    <li>Analyzed 10K+ merchandise transactions identifying slow-moving inventory, recommending SKU rationalization strategy improving <strong>turnover 35%</strong> and reducing carrying costs <strong>20%</strong></li>
+                    <li>Facilitated sprint reviews every 2 weeks with stakeholders; implemented feedback loop reducing <strong>post-deployment defects by 45%</strong></li>
+                </ul>
+            </div>
+
+            <div class="work-item">
+                <div class="work-header">
+                    <div><h4>Senior Operations & Risk Analyst</h4><div class="work-company">Oxigen Services India</div></div>
+                    <div class="work-meta"><span>Mar 2022 – Jul 2024</span><span>Gurugram, India</span></div>
+                </div>
+                <ul class="work-bullets">
+                    <li>Defined product requirements for compliance system across <strong>5K+ kiosks processing $6M daily</strong>; partnered with engineering to deliver solution <strong>recovering $300K</strong> in fraudulent transactions</li>
+                    <li>Identified operational improvements using 5-Why analysis; implemented solutions <strong>reducing errors from 30% to 9%</strong> and increasing revenue <strong>$150K annually</strong></li>
+                    <li>Gathered executive KPI requirements; built Tableau dashboards with SQL ETL pipelines for C-suite, <strong>reducing manual reporting 60%</strong> and enabling real-time risk monitoring</li>
+                    <li>Developed and validated predictive risk models improving fraud detection accuracy <strong>40%</strong> and reducing false positive rate <strong>25%</strong> through iterative performance testing</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+<section class="section" id="projects">
+    <div class="section-header reveal"><h2>Projects</h2></div>
+    <div class="projects-grid stagger-children reveal">
+        <div class="project-card reveal">
+            <div class="project-thumb"><img src="images/Sales Dashboard.jpg" alt="Sales & Customer Dashboard"></div>
+            <div class="project-body">
+                <h3>Sales & Customer Dashboard — Tableau</h3>
+                <p>Interactive Tableau dashboard for sales performance and customer analytics. Features KPIs, trend analysis, and customer segmentation — designed for executives and sales managers to drive data-driven decisions.</p>
+                <div class="project-tags"><span class="project-tag">Tableau</span><span class="project-tag">Data Visualization</span><span class="project-tag">KPIs</span><span class="project-tag">Customer Segmentation</span></div>
+                <div class="project-metric">Interactive Executive Dashboard</div>
+                <a href="https://github.com/shubhammittal-data/Sales-Customer_Dashboard_Tableau" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="project-card reveal">
+            <div class="project-thumb"><img src="images/HR dashboard.jpg" alt="HR Analytics Dashboard"></div>
+            <div class="project-body">
+                <h3>HR Analytics Dashboard — Tableau</h3>
+                <p>Workforce analytics dashboard providing insights into demographics, hiring trends, salary analysis, and employee records. Enables data-driven people decisions for HR teams and hiring managers.</p>
+                <div class="project-tags"><span class="project-tag">Tableau</span><span class="project-tag">HR Analytics</span><span class="project-tag">Workforce Planning</span><span class="project-tag">Python</span></div>
+                <div class="project-metric">Workforce Insights at a Glance</div>
+                <a href="https://github.com/shubhammittal-data/HR_Dashboard_Tableau" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="project-card reveal">
+            <div class="project-thumb"><img src="images/Email automation.jpg" alt="DSRS Email Automation"></div>
+            <div class="project-body">
+                <h3>DSRS Email Automation — Tableau + Python</h3>
+                <p>Automated communication pipeline built with Python Flask and Tableau Actions. Clicking a student's NetID triggers an email via Outlook SMTP — bridging dashboards with real-world workflows.</p>
+                <div class="project-tags"><span class="project-tag">Python Flask</span><span class="project-tag">Tableau</span><span class="project-tag">SMTP</span><span class="project-tag">Workflow Automation</span></div>
+                <div class="project-metric">Automated Communication Pipeline</div>
+                <a href="https://github.com/shubhammittal-data/DSRS_Applications_Email_Automation_Tableau" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="project-card reveal">
+            <div class="project-thumb"><img src="images/Customer life value.jpg" alt="Customer Lifetime Value Analysis"></div>
+            <div class="project-body">
+                <h3>Customer Lifetime Value Analysis</h3>
+                <p>End-to-end CLTV analysis exploring acquisition costs, conversion rates, revenue, ROI, and lifetime value across marketing channels. Rich visualizations surface actionable channel-level insights.</p>
+                <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">CLTV</span><span class="project-tag">Marketing Analytics</span><span class="project-tag">Jupyter</span></div>
+                <div class="project-metric">Multi-Channel ROI Analysis</div>
+                <a href="https://github.com/shubhammittal-data/Customer_Lifetime_Value_Analysis" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="project-card reveal">
+            <div class="project-thumb"><img src="images/Credit scoring and segmentation.jpg" alt="Credit Scoring & Segmentation"></div>
+            <div class="project-body">
+                <h3>Credit Scoring & Segmentation</h3>
+                <p>Credit risk evaluation using FICO methodology. Calculates customer credit scores and segments profiles into risk categories for data-driven financial decision-making.</p>
+                <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">FICO Scoring</span><span class="project-tag">Risk Analysis</span><span class="project-tag">Segmentation</span></div>
+                <div class="project-metric">FICO-Based Risk Segmentation</div>
+                <a href="https://github.com/shubhammittal-data/Credit_Scoring_and_Segmentation" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="section-divider"></div>
+<section class="connect-section" id="contact">
+    <div class="reveal">
+        <h2>Connect with me</h2>
+        <p>I love meeting fellow builders, analysts, and product thinkers. I'm open to roles in Business Analysis, Product Management, Operations, and Data Analytics — wherever I can turn messy problems into clear solutions. Let's connect and build something meaningful together.</p>
+        <div class="connect-links">
+            <a href="https://www.linkedin.com/in/shubham--mittal/" target="_blank" class="connect-btn primary"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://github.com/shubhammittal-data" target="_blank" class="connect-btn"><i class="fab fa-github"></i> GitHub</a>
+            <a href="mailto:sm145@illinois.edu" class="connect-btn"><i class="fas fa-envelope"></i> Email</a>
+            <a href="https://instagram.com/talkpalette" target="_blank" class="connect-btn"><i class="fab fa-instagram"></i> Talk Palette</a>
+        </div>
+    </div>
+</section>
+
+<footer><p>&copy; 2025 Shubham Mittal. Atlanta, GA.</p></footer>
+
+<script>
+function switchTab(tab){document.querySelectorAll('.exp-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.exp-panel').forEach(p=>p.classList.remove('active'));document.querySelector('#panel-'+tab).classList.add('active');event.target.classList.add('active')}
+
+// Scroll reveal observer — handles all animation classes
+const revealObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale,.stagger-children,.section-divider').forEach(el=>revealObserver.observe(el));
+
+// Hero scroll-away: fades & scales hero as user scrolls into content
+const hero=document.querySelector('.hero');
+window.addEventListener('scroll',()=>{
+    if(!hero)return;
+    const scrollY=window.scrollY;
+    const heroH=hero.offsetHeight;
+    const progress=Math.min(scrollY/(heroH*0.6),1);
+    const bento=hero.querySelector('.hero-bento');
+    if(bento){
+        bento.style.transform='scale('+(1-progress*0.06)+') translateY('+(progress*-30)+'px)';
+        bento.style.opacity=1-progress*0.8;
+    }
+},{passive:true});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){e.preventDefault();const target=document.querySelector(this.getAttribute('href'));if(target)target.scrollIntoView({behavior:'smooth',block:'start'})})});
+</script></body>
+</html>
